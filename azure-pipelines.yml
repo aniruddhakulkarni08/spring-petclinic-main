@@ -24,6 +24,7 @@ steps:
 - upload: $(Build.ArtifactStagingDirectory)
   artifact: drop
    
+jobs: 
 - deployment: VMDeploy
   displayName: web
   environment:
@@ -31,7 +32,7 @@ steps:
     resourceType: VirtualMachine
   strategy:
       rolling:
-        maxParallel: 2  #for percentages, mention as x%
+        maxParallel: 5  #for percentages, mention as x%
         preDeploy:
           steps:
           - download: current
@@ -59,4 +60,3 @@ steps:
           success:
             steps:
             - script: echo Notify! This is on success
-  
